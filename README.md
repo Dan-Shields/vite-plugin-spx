@@ -12,7 +12,7 @@ You might want to use a bundler with SPX-GC to:
 
 -   Use frontend frameworks with a build-step (React, Vue, Svelte etc.)
 -   Bundle all dependencies into optimized & minimized files
--   Take advantage of Hot Module Reloading (HMR), where changes to your code update instantly in the renderer
+-   Take advantage of Hot Module Reloading (HMR), where changes to your code & stylesheets update instantly in the renderer
 -   Use TypeScript
 
 Vite is a bundler and it's dev-server is really fast, but (unlike the slower Webpack or Parcel) it can't emit files to disk (kinda by design), so by default SPX-GC can't import your templates.
@@ -23,13 +23,13 @@ Also, when using a bundler a lot of your .html files will end up almost identica
 
 ## Setup
 
-1. If not already done, init your SPX-GC project as a Vite project with your front-end of choice, and optionally TypeScript (see https://vitejs.dev/guide/)
-2. Install the plugin in your package: `npm i -D vite-plugin-spx`
-3. Install the plugin in your `vite.config.mjs` (see example below)
-4. Create a `layout.html` file which is designed to be used with whatever front-end framework you're using.
-5. Start creating `.js` or `.ts` files in `src/` for each template and create a .json file for each one with the same name that is a valid [SPXGCTemplateDefinition](https://github.com/TuomoKu/SPX-GC?tab=readme-ov-file#spxgctemplatedefinition--object-in-templates-).
-6. Run `vite` for development or `vite build` for production
-7. In SPX-GC, load the built templates from `templates/`
+0. If not already done, init your SPX-GC project as a Vite project with your front-end of choice, and optionally TypeScript (see https://vitejs.dev/guide/)
+1. Install the plugin in your package: `npm i -D vite-plugin-spx`
+2. Install the plugin in your `vite.config.mjs` (see example below)
+3. Create a `layout.html` file which is designed to be used with whatever front-end framework you're using.
+4. Start creating `.js` or `.ts` files in `src/` for each template and create a .json file for each one with the same name that is a valid [SPXGCTemplateDefinition](https://github.com/TuomoKu/SPX-GC?tab=readme-ov-file#spxgctemplatedefinition--object-in-templates-).
+5. Run `vite` for development or `vite build` for production
+6. In SPX-GC, load the built templates from `templates/`
 
 ## Default behaviour
 
