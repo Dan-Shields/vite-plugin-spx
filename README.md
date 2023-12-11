@@ -2,7 +2,7 @@
 
 ### Vite plugin to enable its use with SPX-GC
 
-Generates .html files for your SPX-GC templates so they use the Vite dev-server in development, and load assets directly in production. Also automatically injects your [SPXGCTemplateDefinition](https://github.com/TuomoKu/SPX-GC?tab=readme-ov-file#spxgctemplatedefinition--object-in-templates-) in each .html file.
+Generates .html files for your SPX-GC templates so they use the Vite dev-server in development, and load assets directly in production. It also automatically injects your [SPXGCTemplateDefinition](https://github.com/TuomoKu/SPX-GC?tab=readme-ov-file#spxgctemplatedefinition--object-in-templates-) into each template's .html file.
 
 #### This plugin is based on [`vite-plugin-nodecg`](https://github.com/dan-shields/vite-plugin-nodecg). A lot of the below info is mirrored from there.
 
