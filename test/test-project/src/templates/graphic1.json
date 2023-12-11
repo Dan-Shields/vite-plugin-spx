@@ -1,0 +1,12 @@
+{
+    "description": "Graphic 1",
+    "playserver": "OVERLAY",
+    "playchannel": "1",
+    "playlayer": "-",
+    "webplayout": "1",
+    "steps": "1",
+    "out": "manual",
+    "uicolor": "2",
+    "dataformat": "json",
+    "DataFields": []
+}
