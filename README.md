@@ -157,3 +157,5 @@ export default defineConfig(() => {
 -   for development, run `pnpm dev` and for now a manual review of the built files is required
 
 ## Todo
+
+- Make vite listen for changes to the .json files and reload them automatically in development
