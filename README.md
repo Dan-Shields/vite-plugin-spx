@@ -141,7 +141,7 @@ export default defineConfig(() => {
     inputs: {
         '*.{js,ts}': './layout.html'
     },
-    srcDir: 'src/'
+    srcDir: 'src/',
     outDir: 'templates/'
 }
 ```
