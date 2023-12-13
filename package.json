@@ -1,6 +1,6 @@
 {
     "name": "vite-plugin-spx",
-    "version": "1.0.0-beta",
+    "version": "1.0.1-beta",
     "description": "Vite plugin to enable its use with SPX Graphics Controller",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
