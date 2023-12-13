@@ -1,0 +1,36 @@
+{
+  "_shared_module.js": {
+    "css": [
+      "assets/shared_module.css"
+    ],
+    "file": "shared_module.js"
+  },
+  "shared_module.css": {
+    "file": "assets/shared_module.css",
+    "src": "shared_module.css"
+  },
+  "src/templates/graphic1.js": {
+    "file": "assets/graphic1-a5a9b249.js",
+    "imports": [
+      "_shared_module.js"
+    ],
+    "isEntry": true,
+    "src": "src/templates/graphic1.js"
+  },
+  "src/templates/graphic2.js": {
+    "file": "assets/graphic2-b2eb23e7.js",
+    "imports": [
+      "_shared_module.js"
+    ],
+    "isEntry": true,
+    "src": "src/templates/graphic2.js"
+  },
+  "src/templates/nested-template/index.js": {
+    "file": "assets/index-0e24df52.js",
+    "imports": [
+      "_shared_module.js"
+    ],
+    "isEntry": true,
+    "src": "src/templates/nested-template/index.js"
+  }
+}

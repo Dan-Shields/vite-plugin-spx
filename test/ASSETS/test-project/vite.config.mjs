@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import SpxPlugin from '../../dist'
+import SpxPlugin from '../../../dist'
 
 export default defineConfig(() => {
     return {

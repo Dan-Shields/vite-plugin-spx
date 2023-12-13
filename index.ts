@@ -35,6 +35,16 @@ export interface PluginConfig {
 }
 
 export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
+    const posixCwd = process.cwd().split(path.sep).join(path.posix.sep)
+    const projectPath = posixCwd.split('ASSETS')?.[1] // TODO: this is the opposite of robust
+
+    if (!projectPath) {
+        console.error(
+            `vite-plguin-spx: it doesn't appear this project is installed in an SPX instance. \n PWD: ${posixCwd} \n Exiting...`
+        )
+        process.exit(1)
+    }
+
     const inputConfig = pluginConfig?.inputs ?? {
         '*.{js,ts}': './layout.html',
     }
@@ -246,16 +256,19 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
 
         // validate and setup defaults in user's vite config
         config: (_config, { mode }): UserConfig => {
-            const base = path.posix.join(outDir, '.vite')
+            const assetsDir = path.posix.join(outDir, '.vite')
             return {
                 build: {
                     manifest: true,
-                    outDir: base,
+                    outDir: assetsDir,
                     rollupOptions: {
                         input: inputs,
                     },
                 },
-                base: mode === 'development' ? '' : base,
+                base:
+                    mode === 'development'
+                        ? projectPath
+                        : path.posix.join(projectPath, assetsDir),
                 appType: 'custom', // skip the vite dev-server doing HTML rendering - we handle that
             }
         },
