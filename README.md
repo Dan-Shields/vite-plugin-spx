@@ -10,10 +10,10 @@ Generates .html files for your SPX-GC templates so they use the Vite dev-server 
 
 You might want to use a bundler with SPX-GC to:
 
--   Use frontend frameworks with a build-step (React, Vue, Svelte etc.)
--   Bundle all dependencies into optimized & minimized files
--   Take advantage of Hot Module Reloading (HMR), where changes to your code & stylesheets update instantly in the renderer
--   Use TypeScript
+-   use frontend frameworks with a build-step (React, Vue, Svelte etc.)
+-   bundle all dependencies into optimized & minimized files
+-   take advantage of Hot Module Reloading (HMR), where changes to your code & stylesheets update instantly in the renderer
+-   use TypeScript
 
 Vite is a bundler and it's dev-server is really fast, but (unlike the slower Webpack or Parcel) it can't emit files to disk (kinda by design), so by default SPX-GC can't import your templates.
 
@@ -158,4 +158,4 @@ export default defineConfig(() => {
 
 ## Todo
 
-- Make vite listen for changes to the .json files and reload them automatically in development
+-   ~~Make vite listen for changes to the .json files and reload them automatically in development~~

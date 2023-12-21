@@ -52,6 +52,8 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
     const srcDir = pluginConfig?.srcDir ?? 'src/'
     const outDir = pluginConfig?.outDir ?? 'templates/'
 
+    const templateDefintionFiles: string[] = []
+
     const inputPatterns = [
         ...Object.keys(inputConfig).map((matchPath) =>
             path.posix.join(srcDir, matchPath)
@@ -154,7 +156,7 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
             )
         }
 
-        const templateDefinitionPath = path.join(
+        const templateDefinitionPath = path.posix.join(
             path.dirname(entry),
             `${entryFileName}.json`
         )
@@ -172,6 +174,10 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
             } else {
                 throw new Error('No template found')
             }
+
+            templateDefintionFiles.push(
+                path.posix.join(posixCwd, templateDefinitionPath)
+            )
         } catch (e) {
             console.warn(
                 `vite-plugin-spx: no SPXGCTemplateDefinition file found for input "${entry}"`
@@ -322,6 +328,17 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
                 // dev inject
                 generateHTMLFiles()
             })
+        },
+
+        handleHotUpdate({ file }) {
+            if (templateDefintionFiles.includes(file)) {
+                console.log(
+                    'Template definition changed, regenerating .html: ',
+                    file
+                )
+
+                generateHTMLFiles() // TODO: make this just regenerate the 1 html file
+            }
         },
     }
 }
