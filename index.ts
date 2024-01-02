@@ -275,7 +275,7 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
                     mode === 'development'
                         ? projectPath
                         : path.posix.join(projectPath, assetsDir),
-                appType: 'custom', // skip the vite dev-server doing HTML rendering - we handle that
+                appType: 'mpa',
             }
         },
 
