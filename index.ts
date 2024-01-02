@@ -58,6 +58,7 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
         ...Object.keys(inputConfig).map((matchPath) =>
             path.posix.join(srcDir, matchPath)
         ),
+        '!**/*-definition.js',
         '!**.d.ts',
     ]
 
@@ -156,12 +157,28 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
             )
         }
 
-        const templateDefinitionPath = path.posix.join(
-            path.dirname(entry),
-            `${entryFileName}.json`
-        )
-
         try {
+            let templateDefinitionPath: string
+            let isJavascript = false
+
+            templateDefinitionPath = path.posix.join(
+                path.dirname(entry),
+                `${entryFileName}-definition.js`
+            )
+
+            if (!fs.existsSync(templateDefinitionPath)) {
+                templateDefinitionPath = path.posix.join(
+                    path.dirname(entry),
+                    `${entryFileName}.json`
+                )
+
+                isJavascript = true
+
+                if (!fs.existsSync(templateDefinitionPath)) {
+                    throw new Error('No template found')
+                }
+            }
+
             const templateDefinition = fs.readFileSync(
                 templateDefinitionPath,
                 'utf-8'
@@ -169,7 +186,9 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
 
             if (templateDefinition) {
                 tags.push(
-                    `<script>window.SPXGCTemplateDefinition = ${templateDefinition}</script>`
+                    `<script>${
+                        isJavascript ? '' : 'window.SPXGCTemplateDefinition = '
+                    }${templateDefinition}</script>`
                 )
             } else {
                 throw new Error('No template found')
