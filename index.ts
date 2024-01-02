@@ -32,6 +32,11 @@ export interface PluginConfig {
      * @default 'templates/'
      */
     outDir?: string | undefined
+
+    /** Flag to enable reading definition files from '<template_name>-definition.js' instead of a JSON file.
+     *
+     */
+    jsDefinitions?: boolean | undefined
 }
 
 export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
@@ -156,10 +161,19 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
             )
         }
 
-        const templateDefinitionPath = path.posix.join(
-            path.dirname(entry),
-            `${entryFileName}.json`
-        )
+        let templateDefinitionPath: string
+
+        if (pluginConfig.jsDefinitions) {
+            templateDefinitionPath = path.posix.join(
+                path.dirname(entry),
+                `${entryFileName}-definition.js`
+            )
+        } else {
+            templateDefinitionPath = path.posix.join(
+                path.dirname(entry),
+                `${entryFileName}.json`
+            )
+        }
 
         try {
             const templateDefinition = fs.readFileSync(
@@ -169,7 +183,11 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
 
             if (templateDefinition) {
                 tags.push(
-                    `<script>window.SPXGCTemplateDefinition = ${templateDefinition}</script>`
+                    `<script>${
+                        pluginConfig.jsDefinitions
+                            ? ''
+                            : 'window.SPXGCTemplateDefinition = '
+                    }${templateDefinition}</script>`
                 )
             } else {
                 throw new Error('No template found')
@@ -275,7 +293,7 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
                     mode === 'development'
                         ? projectPath
                         : path.posix.join(projectPath, assetsDir),
-                appType: 'custom', // skip the vite dev-server doing HTML rendering - we handle that
+                appType: 'mpa',
             }
         },
 
