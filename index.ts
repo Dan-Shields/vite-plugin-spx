@@ -159,7 +159,7 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
 
         try {
             let templateDefinitionPath: string
-            let isJavascript = false
+            let isJavascript = true
 
             templateDefinitionPath = path.posix.join(
                 path.dirname(entry),
@@ -172,7 +172,7 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
                     `${entryFileName}.json`
                 )
 
-                isJavascript = true
+                isJavascript = false
 
                 if (!fs.existsSync(templateDefinitionPath)) {
                     throw new Error('No template found')
