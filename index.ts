@@ -36,11 +36,18 @@ export interface PluginConfig {
 
 export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
     const posixCwd = process.cwd().split(path.sep).join(path.posix.sep)
-    const projectPath = posixCwd.split('ASSETS')?.[1] // TODO: this is the opposite of robust
+    let projectPath = posixCwd.split('ASSETS')?.[1] // TODO: this is the opposite of robust
 
     if (!projectPath) {
         console.warn(
             `vite-plugin-spx: it doesn't appear this project is installed in an SPX instance. \n PWD: ${posixCwd} \n This build will not work until copied into the correct location`
+        )
+
+        projectPath = `/templates/${posixCwd.split('/').at(-1)}`
+
+        console.warn(
+            `vite-plugin-spx: defaulting project path to: `,
+            projectPath
         )
     }
 
