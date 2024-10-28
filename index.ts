@@ -39,10 +39,9 @@ export default function viteSpxPlugin(pluginConfig?: PluginConfig): Plugin {
     const projectPath = posixCwd.split('ASSETS')?.[1] // TODO: this is the opposite of robust
 
     if (!projectPath) {
-        console.error(
-            `vite-plguin-spx: it doesn't appear this project is installed in an SPX instance. \n PWD: ${posixCwd} \n Exiting...`
+        console.warn(
+            `vite-plugin-spx: it doesn't appear this project is installed in an SPX instance. \n PWD: ${posixCwd} \n This build will not work until copied into the correct location`
         )
-        process.exit(1)
     }
 
     const inputConfig = pluginConfig?.inputs ?? {
